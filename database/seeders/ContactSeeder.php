@@ -15,6 +15,7 @@ class ContactSeeder extends Seeder
     {
         $contact = new Contact();
 
+        $contact->id = 1;
         $contact->name = 'Fernando';
         $contact->email = 'fernando@gmail.com';
         $contact->phone = '12345678';
