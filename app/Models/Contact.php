@@ -105,6 +105,7 @@ class Contact extends Model
         }
     }
 
+
     public function destroyContact($id)
     {
         try {
