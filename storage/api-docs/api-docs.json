@@ -175,6 +175,182 @@
                     }
                 }
             }
+        },
+        "/api/v1/members": {
+            "get": {
+                "tags": [
+                    "Members"
+                ],
+                "summary": "Display a list of members",
+                "operationId": "b86d81ff851f865756b7622fdfd95d4e",
+                "responses": {
+                    "200": {
+                        "description": "Members retrived successfully"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Members"
+                ],
+                "summary": "Create a new member",
+                "operationId": "170db1005ccba0379977659cbbe7988d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "full_name",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "format": "string"
+                                    },
+                                    "full_name": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "facebook_url": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "linkeding_url": {
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Member created successfully"
+                    },
+                    "400": {
+                        "description": "bad request"
+                    }
+                }
+            }
+        },
+        "/api/v1/members/{id}": {
+            "get": {
+                "tags": [
+                    "Members"
+                ],
+                "summary": "Display a member by id",
+                "operationId": "484bb8856ddcafd2f64c0eeeeab84f1b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of member",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Member retrived successfully"
+                    },
+                    "404": {
+                        "description": "Member not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Members"
+                ],
+                "summary": "Update a member by id",
+                "operationId": "8083181175c0316e742b49317519782e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of member",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "format": "string"
+                                    },
+                                    "full_name": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "facebook_url": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "linkedin_url": {
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Member updated successfully"
+                    },
+                    "404": {
+                        "description": "Member not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Members"
+                ],
+                "summary": "Delete a member",
+                "operationId": "64400aafdcf6089afd7a66870c7ad254",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of member",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Member deleted successfully"
+                    },
+                    "404": {
+                        "description": "Member not found"
+                    }
+                }
+            }
         }
     }
 }
