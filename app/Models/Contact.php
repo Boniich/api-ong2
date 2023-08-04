@@ -13,21 +13,11 @@ class Contact extends Model
 
     private string $modelNotFoundMsg = 'Contact not found';
 
-    private function successResponse(object $data, string $message)
-    {
-        return ['success' => true, 'data' => $data, 'message' => $message];
-    }
-
-    private function errorResponse(string $message)
-    {
-        return ['success' => false, 'error' => $message];
-    }
-
     public function getAllContacts()
     {
         $contacts = $this->all();
 
-        return response()->json($this->successResponse($contacts, 'Contacts retrived successfully'), 200);
+        return okResponse200($contacts, 'Contacts retrived successfully');
     }
 
     public function storeContacts(Request $request)
@@ -49,9 +39,9 @@ class Contact extends Model
 
             $newContact->save();
 
-            return response()->json($this->successResponse($newContact, 'Contact created successfully'), 201);
+            return resourceCreatedResponse201($newContact, 'Contact created successfully');
         } catch (\Throwable $th) {
-            return response()->json($this->errorResponse('Bad Request'), 400);
+            return badRequestResponse400();
         }
     }
 
@@ -60,9 +50,9 @@ class Contact extends Model
         try {
             $contact = $this->findOrFail($id);
 
-            return response()->json($this->successResponse($contact, 'Contact retrived successfully'), 200);
+            return okResponse200($contact, 'Contact retrived successfully');
         } catch (ModelNotFoundException $th) {
-            return response()->json($this->errorResponse($this->modelNotFoundMsg), 404);
+            return modelNotFoundResponse($this->modelNotFoundMsg);
         }
     }
 
@@ -99,9 +89,9 @@ class Contact extends Model
 
             $contact->update();
 
-            return response()->json($this->successResponse($contact, 'Contact updated successfully'));
+            return okResponse200($contact, 'Contact updated successfully');
         } catch (ModelNotFoundException $th) {
-            return response()->json($this->errorResponse($this->modelNotFoundMsg));
+            return modelNotFoundResponse($this->modelNotFoundMsg);
         }
     }
 
@@ -113,9 +103,9 @@ class Contact extends Model
 
             $contact->delete();
 
-            return response()->json($this->successResponse($contact, 'Contact deleted successfully'));
+            return okResponse200($contact, 'Contact deleted successfully');
         } catch (ModelNotFoundException $th) {
-            return response()->json($this->errorResponse($this->modelNotFoundMsg));
+            return modelNotFoundResponse($this->modelNotFoundMsg);
         }
     }
 }
