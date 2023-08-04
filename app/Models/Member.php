@@ -14,21 +14,11 @@ class Member extends Model
 
     private string $notFoundMsg = "Member not found";
 
-    private function successResponse(object $data, string $message)
-    {
-        return ['success' => true, 'data' => $data, 'message' => $message];
-    }
-
-    private function errorResponse(string $message)
-    {
-        return ['success' => false, 'error' => $message];
-    }
-
     public function getAllMembers()
     {
         $members = $this->all();
 
-        return response()->json($this->successResponse($members, 'Members retrived successfully'));
+        return okResponse200($members, 'Members retrived successfully');
     }
 
     public function getMemberById($id)
@@ -36,10 +26,10 @@ class Member extends Model
         try {
             $member = $this->findOrFail($id);
 
-            return response()->json($this->successResponse($member, 'Member retrived successfully'));
+            return okResponse200($member, 'Member retrived successfully');
         } catch (ModelNotFoundException $th) {
 
-            return response()->json($this->errorResponse($this->notFoundMsg), 404);
+            return modelNotFoundResponse($this->notFoundMsg);
         }
     }
 
@@ -73,10 +63,10 @@ class Member extends Model
 
             $newMember->save();
 
-            return response()->json($this->successResponse($newMember, 'Member created successfully'), 201);
+            return resourceCreatedResponse201($newMember, 'Member created successfully');
         } catch (\Throwable $th) {
 
-            return response()->json($this->errorResponse('Bad Request'));
+            return badRequestResponse400();
         }
     }
 
@@ -128,9 +118,9 @@ class Member extends Model
 
             $member->update();
 
-            return response()->json($this->successResponse($member, 'Member updated successfully'));
+            return okResponse200($member, 'Member updated successfully');
         } catch (ModelNotFoundException $th) {
-            return response()->json($this->errorResponse($this->notFoundMsg), 404);
+            return modelNotFoundResponse($this->notFoundMsg);
         }
     }
 
@@ -151,9 +141,9 @@ class Member extends Model
             }
 
             $member->delete();
-            return response()->json($this->successResponse($member, 'Member deleted successfully'));
+            return okResponse200($member, 'Member deleted successfully');
         } catch (ModelNotFoundException $th) {
-            return response()->json($this->errorResponse($this->notFoundMsg), 404);
+            return modelNotFoundResponse($this->notFoundMsg);
         }
     }
 }
