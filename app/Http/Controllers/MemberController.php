@@ -67,7 +67,6 @@ class MemberController extends Controller
      *      path="/api/v1/members",
      *      tags={"Members"},
      *      summary="Create a new member",
-     * 
      *      @OA\RequestBody(
      *          required=true,
      *          @OA\JsonContent(

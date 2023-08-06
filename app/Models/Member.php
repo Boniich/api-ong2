@@ -52,10 +52,7 @@ class Member extends Model
             $newMember->description = $request->description;
 
             if ($request->has('image')) {
-                $imageName = time() . '.' . $request->image->getClientOriginalExtension();
-                Storage::disk('public')->put('members/' . $imageName, file_get_contents($request->image));
-
-                $newMember->image = 'members/' . $imageName;
+                $newMember->image = upLoadImage($request->image, 'members');
             }
 
             $newMember->facebook_url = $request->facebook_url;
@@ -93,19 +90,10 @@ class Member extends Model
 
             if ($request->has('image')) {
 
-                $image = $member->image;
+                $imageLoaded = $member->image;
+                $imageInRequest = $request->image;
 
-                if (!is_null($image)) {
-                    $isThereAnImage = Storage::disk('public')->exists($image);
-
-                    if ($isThereAnImage) {
-                        Storage::disk('public')->delete($image);
-                    }
-                }
-                $imageName = time() . '.' . $request->image->getClientOriginalExtension();
-                Storage::disk('public')->put('members/' . $imageName, file_get_contents($request->image));
-
-                $member->image = 'members/' . $imageName;
+                $member->image = updateImage($imageLoaded, $imageInRequest, 'members');
             }
 
             if ($request->has('facebook_url')) {
@@ -132,14 +120,7 @@ class Member extends Model
 
             $image = $member->image;
 
-            if (!is_null($image)) {
-                $isThereAnImage = Storage::disk('public')->exists($image);
-
-                if ($isThereAnImage) {
-                    Storage::disk('public')->delete($image);
-                }
-            }
-
+            destroyImage($image);
             $member->delete();
             return okResponse200($member, 'Member deleted successfully');
         } catch (ModelNotFoundException $th) {
