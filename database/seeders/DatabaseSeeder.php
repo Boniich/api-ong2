@@ -14,8 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Storage::deleteDirectory('public/members');
-        Storage::makeDirectory('public/members');
+        makeAndDeleteDirectory('members');
 
         $this->call(ContactSeeder::class);
 
