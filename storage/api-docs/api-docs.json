@@ -195,6 +195,17 @@
                 ],
                 "summary": "Create a new member",
                 "operationId": "170db1005ccba0379977659cbbe7988d",
+                "parameters": [
+                    {
+                        "name": "image",
+                        "in": "query",
+                        "description": "id of contact",
+                        "required": true,
+                        "schema": {
+                            "type": "file"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -218,7 +229,7 @@
                                         "format": "string"
                                     },
                                     "image": {
-                                        "type": "string",
+                                        "type": "file",
                                         "format": "string"
                                     },
                                     "facebook_url": {
