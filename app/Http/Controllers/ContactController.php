@@ -31,6 +31,18 @@ class ContactController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Contacts retrived successfully",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", format="string", example="true"),
+     *              @OA\Property(property="data", type="string", example= 
+     *                     {{
+     *                          "id": 1,
+     *                          "name": "Julieta Diaz",
+     *                          "email": "juli@gmail.com",
+     *                          "phone": "1222222",
+     *                          "message": "Hola soy juli!",
+     *                      }}),
+     *              @OA\Property(property="message", type="string", format="string", example="Contacts retrived successfully"),
+     *      ),
      *      )
      *  )
      * 
@@ -60,11 +72,27 @@ class ContactController extends Controller
      *      ),
      *     @OA\Response(
      *          response=200,
-     *          description="Contact created successfully"  
+     *          description="Contact created successfully",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", format="boolean", example="true"),
+     *              @OA\Property(property="data", type="string", example= 
+     *                     {
+     *                          "id": 1,
+     *                          "name": "Julieta Diaz",
+     *                          "email": "juli@gmail.com",
+     *                          "phone": "1222222",
+     *                          "message": "Hola soy juli!",
+     *                      }),
+     *              @OA\Property(property="message", type="string", format="string", example="Contact created successfully"),
+     *      ),  
      *      ),
      *      @OA\Response(
      *          response=400,
-     *          description="bad request"  
+     *          description="bad request",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", format="boolean", example="false"),
+     *              @OA\Property(property="error", type="string", example= "Bad Request"),
+     *          ),  
      *      )
      *   )
      * 
@@ -90,10 +118,26 @@ class ContactController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Contact retrived successfully",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", format="boolean", example="true"),
+     *              @OA\Property(property="data", type="string", example= 
+     *                     {
+     *                          "id": 1,
+     *                          "name": "Julieta Diaz",
+     *                          "email": "juli@gmail.com",
+     *                          "phone": "1222222",
+     *                          "message": "Hola soy juli!",
+     *                      }),
+     *              @OA\Property(property="message", type="string", format="string", example="Contact retrived successfully"),
+     *      ),
      *      ),
      *      @OA\Response(
      *          response=404,
      *          description="Contact not found",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", format="boolean", example="false"),
+     *              @OA\Property(property="error", type="string", example= "Contact not found"),
+     *          ),
      *      )
      *  )
      * 
@@ -131,10 +175,26 @@ class ContactController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Contact updated successfully",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", format="boolean", example="true"),
+     *              @OA\Property(property="data", type="string", example= 
+     *                     {
+     *                          "id": 1,
+     *                          "name": "Julieta Diaz",
+     *                          "email": "juli@gmail.com",
+     *                          "phone": "1222222",
+     *                          "message": "Hola soy juli!",
+     *                      }),
+     *              @OA\Property(property="message", type="string", format="string", example="Contact updated successfully"),
+     *      ),
      *      ),
      *      @OA\Response(
      *          response=404,
      *          description="Contact not found",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", format="boolean", example="false"),
+     *              @OA\Property(property="error", type="string", example= "Contact not found"),
+     *          ),
      *      )
      *  )
      */
@@ -160,10 +220,26 @@ class ContactController extends Controller
      *     @OA\Response(
      *          response=200,
      *          description="Contact deleted successfully",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", format="boolean", example="true"),
+     *              @OA\Property(property="data", type="string", example= 
+     *                     {
+     *                          "id": 1,
+     *                          "name": "Julieta Diaz",
+     *                          "email": "juli@gmail.com",
+     *                          "phone": "1222222",
+     *                          "message": "Hola soy juli!",
+     *                      }),
+     *              @OA\Property(property="message", type="string", format="string", example="Contact deleted successfully"),
+     *      ),
      *      ),
      *      @OA\Response(
      *          response=404,
      *          description="Contact not found",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", format="boolean", example="false"),
+     *              @OA\Property(property="error", type="string", example= "Contact not found"),
+     *          ),
      *      )
      *  )
      */
