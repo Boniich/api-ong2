@@ -23,8 +23,32 @@ class MemberController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Members retrived successfully",
-     *      )
-     *  )
+     *           @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", format="string", example="true"),
+     *              @OA\Property(property="data", type="string", example= 
+     *                     {{
+     *                          "id": 4,
+     *                          "full_name": "Fernando Hernandez",
+     *                          "description": "Director de la ONG",
+     *                          "image": "members/image.png",
+     *                          "facebook_url": "faceboook/FernandoHernandez",
+     *                          "linkedin": "linkedin/FernandoHernandez"
+     *                      },{
+     *                          "id": 5,
+     *                          "full_name": "Juan Carlos Perez",
+     *                          "description": "Sub Director de la ONG",
+     *                          "image": null,
+     *                          "facebook_url": null,
+     *                          "linkedin": null
+     *                      }
+     * 
+     *                  }),
+     *              
+     *              @OA\Property(property="message", type="string", format="string", example="Members retrived successfully"),
+     *      ),
+     *  ),
+     * 
+     * )
      * 
      */
 
@@ -48,10 +72,30 @@ class MemberController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Member retrived successfully",
+     *      @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", format="boolean", example="true"),
+     *              @OA\Property(property="data", type="string", example= 
+     *                     {
+     *                          "id": 4,
+     *                          "full_name": "Fernando Hernandez",
+     *                          "description": "Director de la ONG",
+     *                          "image": "members/image.png",
+     *                          "facebook_url": "faceboook/FernandoHernandez",
+     *                          "linkedin": "linkedin/FernandoHernandez"
+     *                      }
+     *                  ),
+     *              
+     *              @OA\Property(property="message", type="string", format="string", example="Member retrived successfully"),
+     *      ),
      *      ),
      *      @OA\Response(
      *          response=404,
      *          description="Member not found",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", format="boolean", example="false"),
+     *              @OA\Property(property="error", type="string", example= "Member not found"),
+     *              ),
+     *          ),
      *      )
      *  )
      * 
@@ -69,23 +113,69 @@ class MemberController extends Controller
      *      summary="Create a new member",
      *      @OA\RequestBody(
      *          required=true,
-     *          @OA\JsonContent(
-     *          required={"full_name","description"},
-     *          @OA\Property(property="id", type="integer", format="string"),
-     *          @OA\Property(property="full_name", type="string", format="string"),
-     *          @OA\Property(property="description", type="string", format="string" ),
-     *          @OA\Property(property="image", type="string", format="string"),
-     *          @OA\Property(property="facebook_url", type="string", format="string"),
-     *          @OA\Property(property="linkeding_url", type="string", format="string"),
-     *      ),
+     *          @OA\MediaType(
+     *          mediaType="multipart/form-data",
+     *          @OA\Schema( 
+     *              
+     *               @OA\Property(
+     *                     description="full name",
+     *                     property="full_name",
+     *                     type="string",
+     *                     format="string",
+     *                 ),
+     *               @OA\Property(
+     *                     description="description",
+     *                     property="description",
+     *                     type="string",
+     *                     format="string",
+     *                 ),
+     *              @OA\Property(
+     *                     description="file to upload",
+     *                     property="image",
+     *                     type="file",
+     *                     format="file",
+     *                 ),
+     *              @OA\Property(
+     *                     description="url de facebook",
+     *                     property="facebook_url",
+     *                     type="string",
+     *                     format="string",
+     *                 ),
+     * 
+     *              @OA\Property(
+     *                     description="url de linkedin",
+     *                     property="linkedin_url",
+     *                     type="string",
+     *                     format="string",
+     *                 ),
+     *             ),
+     *          ),
      *      ),
      *     @OA\Response(
      *          response=200,
-     *          description="Member created successfully"  
+     *          description="Member created successfully",
+     *          @OA\JsonContent(
+     *             @OA\Property(property="success", type="boolean", format="boolean", example="true"),
+     *             @OA\Property(property="data", type="string", example= 
+     *                     {
+     *                          "id": 4,
+     *                          "full_name": "Fernando Hernandez",
+     *                          "description": "Director de la ONG",
+     *                          "image": "members/1456894523.png",
+     *                          "facebook_url": "faceboook/FernandoHernandez",
+     *                          "linkedin": "linkedin/FernandoHernandez"
+     *                      }
+     *                  ),
+     *              @OA\Property(property="message", type="string", format="string", example="Member created successfully"),
+     *      ),  
      *      ),
      *      @OA\Response(
      *          response=400,
-     *          description="bad request"  
+     *          description="bad request",  
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", format="boolean", example="false"),
+     *              @OA\Property(property="error", type="string", example= "Bad Request"),
+     *          ),
      *      )
      *   )
      * 
@@ -123,10 +213,28 @@ class MemberController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Member updated successfully",
+     *          @OA\JsonContent(
+     *             @OA\Property(property="success", type="boolean", format="boolean", example="true"),
+     *             @OA\Property(property="data", type="string", example= 
+     *                     {
+     *                          "id": 4,
+     *                          "full_name": "Carlos Hernandez",
+     *                          "description": "Tesorero de la ONG",
+     *                          "image": "members/1456894523.png",
+     *                          "facebook_url": "faceboook/CarlosHernandez",
+     *                          "linkedin": "linkedin/CarlosHernandez"
+     *                      }
+     *                  ),
+     *            @OA\Property(property="message", type="string", format="string", example="Member updated successfully"),
+     *      ),  
      *      ),
      *      @OA\Response(
      *          response=404,
      *          description="Member not found",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", format="boolean", example="false"),
+     *              @OA\Property(property="error", type="string", example= "Member not found"),
+     *          ),
      *      )
      *  )
      */
@@ -151,10 +259,28 @@ class MemberController extends Controller
      *     @OA\Response(
      *          response=200,
      *          description="Member deleted successfully",
+     *          @OA\JsonContent(
+     *             @OA\Property(property="success", type="boolean", format="boolean", example="true"),
+     *             @OA\Property(property="data", type="string", example= 
+     *                     {
+     *                          "id": 4,
+     *                          "full_name": "Carlos Hernandez",
+     *                          "description": "Tesorero de la ONG",
+     *                          "image": "members/1456894523.png",
+     *                          "facebook_url": "faceboook/CarlosHernandez",
+     *                          "linkedin": "linkedin/CarlosHernandez"
+     *                      }
+     *                  ),
+     *            @OA\Property(property="message", type="string", format="string", example="Member deleted successfully"),
+     *      ),  
      *      ),
      *      @OA\Response(
      *          response=404,
      *          description="Member not found",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", format="boolean", example="false"),
+     *              @OA\Property(property="error", type="string", example= "Member not found"),
+     *          ),
      *      )
      *  )
      */

@@ -185,7 +185,47 @@
                 "operationId": "b86d81ff851f865756b7622fdfd95d4e",
                 "responses": {
                     "200": {
-                        "description": "Members retrived successfully"
+                        "description": "Members retrived successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "string",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": [
+                                                {
+                                                    "id": 4,
+                                                    "full_name": "Fernando Hernandez",
+                                                    "description": "Director de la ONG",
+                                                    "image": "members/image.png",
+                                                    "facebook_url": "faceboook/FernandoHernandez",
+                                                    "linkedin": "linkedin/FernandoHernandez"
+                                                },
+                                                {
+                                                    "id": 5,
+                                                    "full_name": "Juan Carlos Perez",
+                                                    "description": "Sub Director de la ONG",
+                                                    "image": null,
+                                                    "facebook_url": null,
+                                                    "linkedin": null
+                                                }
+                                            ]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Members retrived successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -195,48 +235,34 @@
                 ],
                 "summary": "Create a new member",
                 "operationId": "170db1005ccba0379977659cbbe7988d",
-                "parameters": [
-                    {
-                        "name": "image",
-                        "in": "query",
-                        "description": "id of contact",
-                        "required": true,
-                        "schema": {
-                            "type": "file"
-                        }
-                    }
-                ],
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "application/json": {
+                        "multipart/form-data": {
                             "schema": {
-                                "required": [
-                                    "full_name",
-                                    "description"
-                                ],
                                 "properties": {
-                                    "id": {
-                                        "type": "integer",
-                                        "format": "string"
-                                    },
                                     "full_name": {
+                                        "description": "full name",
                                         "type": "string",
                                         "format": "string"
                                     },
                                     "description": {
+                                        "description": "description",
                                         "type": "string",
                                         "format": "string"
                                     },
                                     "image": {
+                                        "description": "file to upload",
                                         "type": "file",
-                                        "format": "string"
+                                        "format": "file"
                                     },
                                     "facebook_url": {
+                                        "description": "url de facebook",
                                         "type": "string",
                                         "format": "string"
                                     },
-                                    "linkeding_url": {
+                                    "linkedin_url": {
+                                        "description": "url de linkedin",
                                         "type": "string",
                                         "format": "string"
                                     }
@@ -248,10 +274,58 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Member created successfully"
+                        "description": "Member created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 4,
+                                                "full_name": "Fernando Hernandez",
+                                                "description": "Director de la ONG",
+                                                "image": "members/1456894523.png",
+                                                "facebook_url": "faceboook/FernandoHernandez",
+                                                "linkedin": "linkedin/FernandoHernandez"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Member created successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "400": {
-                        "description": "bad request"
+                        "description": "bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -273,10 +347,58 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Member retrived successfully"
+                        "description": "Member retrived successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 4,
+                                                "full_name": "Fernando Hernandez",
+                                                "description": "Director de la ONG",
+                                                "image": "members/image.png",
+                                                "facebook_url": "faceboook/FernandoHernandez",
+                                                "linkedin": "linkedin/FernandoHernandez"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Member retrived successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "404": {
-                        "description": "Member not found"
+                        "description": "Member not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Member not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -332,10 +454,58 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Member updated successfully"
+                        "description": "Member updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 4,
+                                                "full_name": "Carlos Hernandez",
+                                                "description": "Tesorero de la ONG",
+                                                "image": "members/1456894523.png",
+                                                "facebook_url": "faceboook/CarlosHernandez",
+                                                "linkedin": "linkedin/CarlosHernandez"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Member updated successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "404": {
-                        "description": "Member not found"
+                        "description": "Member not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Member not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -355,10 +525,58 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Member deleted successfully"
+                        "description": "Member deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 4,
+                                                "full_name": "Carlos Hernandez",
+                                                "description": "Tesorero de la ONG",
+                                                "image": "members/1456894523.png",
+                                                "facebook_url": "faceboook/CarlosHernandez",
+                                                "linkedin": "linkedin/CarlosHernandez"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Member deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "404": {
-                        "description": "Member not found"
+                        "description": "Member not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Member not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
