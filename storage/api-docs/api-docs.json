@@ -799,6 +799,164 @@
                     }
                 }
             }
+        },
+        "/api/v1/organization": {
+            "get": {
+                "tags": [
+                    "Organization"
+                ],
+                "summary": "Display organization data",
+                "operationId": "2e5b7ecc2051b59aead7a1f92d11eeff",
+                "responses": {
+                    "200": {
+                        "description": "Organization retrived successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": [
+                                                {
+                                                    "id": 1,
+                                                    "name": "ONG LARAVEL",
+                                                    "logo": "organization/image.png",
+                                                    "short_description": "Somos una ONG que se dedica a enseñarle PHP y LARAVEL a los niños",
+                                                    "long_description": "ONG dedicada a la enseñanza",
+                                                    "welcome_text": "Bienvenidos a la ONG LARAVEl",
+                                                    "address": "Calle Falsa 123",
+                                                    "phone": "123456",
+                                                    "cell_phone": "123456",
+                                                    "facebook_url": "facebook/ongLaravel",
+                                                    "linkedin_url": "linkedin/ongLaravel",
+                                                    "instagram_url": "instagram/ongLaravel",
+                                                    "twitter_url": "twitter/ongLaravel"
+                                                }
+                                            ]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Organization retrived successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Organization"
+                ],
+                "summary": "Update organization data",
+                "operationId": "b3c40a2356fd568121944f1980b787a2",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "short_description": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "long_description": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "welcome_text": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "cell_phone": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "facebook_url": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "linkedin_url": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "instagram_url": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "twitter_url": {
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Organization data updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 1,
+                                                "name": "ONG LARAVEL",
+                                                "logo": "organization/image.png",
+                                                "short_description": "Somos una ONG que se dedica a enseñarle PHP y LARAVEL a los niños",
+                                                "long_description": "ONG dedicada a la enseñanza",
+                                                "welcome_text": "Bienvenidos a la ONG LARAVEl",
+                                                "address": "Calle Falsa 123",
+                                                "phone": "123456",
+                                                "cell_phone": "123456",
+                                                "facebook_url": "facebook/ongLaravel",
+                                                "linkedin_url": "linkedin/ongLaravel",
+                                                "instagram_url": "instagram/ongLaravel",
+                                                "twitter_url": "twitter/ongLaravel"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Organization data updated successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
