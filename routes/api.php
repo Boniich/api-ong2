@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +27,4 @@ Route::apiResource('v1/contacts', ContactController::class);
 Route::apiResource('v1/members', MemberController::class);
 Route::get('v1/organization', [OrganizationController::class, 'index']);
 Route::put('v1/organization', [OrganizationController::class, 'update']);
+Route::apiResource('v1/projects', ProjectController::class);
