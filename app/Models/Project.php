@@ -87,7 +87,7 @@ class Project extends Model
 
             $project->update();
 
-            return okResponse200($project, 'Project updated successffully');
+            return okResponse200($project, 'Project updated successfully');
         } catch (ModelNotFoundException $th) {
             return modelNotFoundResponse($this->modelNotFound);
         }
