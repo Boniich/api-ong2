@@ -1333,6 +1333,367 @@
                 }
             }
         },
+        "/api/v1/socialmediaitems": {
+            "get": {
+                "tags": [
+                    "SocialMediaItems"
+                ],
+                "summary": "Display a list of social media items",
+                "operationId": "759b24224970bf5d18aa708bee356f3a",
+                "responses": {
+                    "200": {
+                        "description": "Social Media Items retrived successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": [
+                                                {
+                                                    "id": 1,
+                                                    "name": "Facebook",
+                                                    "image": "socialMediaItems/12345593.png",
+                                                    "url": "facebook/ong"
+                                                }
+                                            ]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Social Media Items retrived successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "SocialMediaItems"
+                ],
+                "summary": "Create a new social media item",
+                "operationId": "b0065db5641d25368988a11e73dac9ee",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "name of social media",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "image": {
+                                        "description": "image of social media",
+                                        "type": "file",
+                                        "format": "file"
+                                    },
+                                    "url": {
+                                        "description": "url of social media",
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Social Media Item created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 1,
+                                                "name": "Facebook",
+                                                "image": "socialMediaItems/12345593.png",
+                                                "url": "facebook/ong"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Social Media Item created successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/socialmediaitems/{id}": {
+            "get": {
+                "tags": [
+                    "SocialMediaItems"
+                ],
+                "summary": "Display a social media item by id",
+                "operationId": "eaf7aca971b12a2bb24a86890061b1da",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of social media item",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Social Media Item retrived successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 1,
+                                                "name": "Facebook",
+                                                "image": "socialMediaItems/12345593.png",
+                                                "url": "facebook/ong"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Social Media Item retrived successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Social Media Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Social Media Item not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "SocialMediaItems"
+                ],
+                "summary": "Update a social media item by id",
+                "operationId": "18e49fc7789328fc6218243fe6dbc089",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of social media item",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "url": {
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Social Media Item updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 1,
+                                                "name": "Facebook",
+                                                "image": "socialMediaItems/12345593.png",
+                                                "url": "facebook/ong"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Social Media Item updated successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Social Media Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Social Media Item not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "SocialMediaItems"
+                ],
+                "summary": "Delete a social media item",
+                "operationId": "36c63df02668377c8bfd4a2faf67ad8b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of social media item",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Social Media Item deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 1,
+                                                "name": "Facebook",
+                                                "image": "socialMediaItems/12345593.png",
+                                                "url": "facebook/ong"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Social Media Item deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Social Media Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Social Media Item not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/testimonials": {
             "get": {
                 "tags": [
