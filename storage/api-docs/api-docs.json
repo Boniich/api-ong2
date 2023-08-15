@@ -2054,6 +2054,395 @@
                     }
                 }
             }
+        },
+        "/api/v1/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Display a list of users",
+                "operationId": "3ab81e3f9b24b4f36ab08d72349ac632",
+                "responses": {
+                    "200": {
+                        "description": "Users retrived successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": [
+                                                {
+                                                    "id": 1,
+                                                    "name": "Claudia Perez",
+                                                    "email": "clau@gmail.com",
+                                                    "email_verified_at": "2023-08-15T10:46:57.000000Z",
+                                                    "address": "calle false 123",
+                                                    "profile_image": "users/123456.png"
+                                                }
+                                            ]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Users retrived successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create a new user",
+                "operationId": "ba548b97148bb5c0d8cab3bc3f128bfd",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "name of person",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "email": {
+                                        "description": "email",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "password": {
+                                        "description": "password",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "address": {
+                                        "description": "address",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "profile_image": {
+                                        "description": "profile image",
+                                        "type": "file",
+                                        "format": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 1,
+                                                "name": "Claudia Perez",
+                                                "email": "clau@gmail.com",
+                                                "email_verified_at": "2023-08-15T10:46:57.000000Z",
+                                                "address": "calle false 123",
+                                                "profile_image": "users/123456.png"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "User created successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Display a user by id",
+                "operationId": "daaf7a6169ee9348c3fddb07778598ff",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of user",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User retrived successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 1,
+                                                "name": "Claudia Perez",
+                                                "email": "clau@gmail.com",
+                                                "email_verified_at": "2023-08-15T10:46:57.000000Z",
+                                                "address": "calle false 123",
+                                                "profile_image": "users/123456.png"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "User retrived successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "User not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update a user by id",
+                "operationId": "59e98fba99e974815e27979dd58e2175",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of user",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 1,
+                                                "name": "Claudia Perez",
+                                                "email": "clau@gmail.com",
+                                                "email_verified_at": "2023-08-15T10:46:57.000000Z",
+                                                "address": "calle false 123",
+                                                "profile_image": "users/123456.png"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "User updated successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "User not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Delete a user",
+                "operationId": "c30c64b8b7730b65c7714c9af4a6f5fa",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of user",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 1,
+                                                "name": "Claudia Perez",
+                                                "email": "clau@gmail.com",
+                                                "email_verified_at": "2023-08-15T10:46:57.000000Z",
+                                                "address": "calle false 123",
+                                                "profile_image": "users/123456.png"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "User deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "User not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
