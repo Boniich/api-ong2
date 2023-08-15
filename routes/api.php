@@ -6,6 +6,7 @@ use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SocialMediaItemController;
 use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,3 +33,4 @@ Route::put('v1/organization', [OrganizationController::class, 'update']);
 Route::apiResource('v1/projects', ProjectController::class);
 Route::apiResource('v1/testimonials', TestimonialController::class);
 Route::apiResource('v1/socialmediaitems', SocialMediaItemController::class);
+Route::apiResource('v1/users', UserController::class);
