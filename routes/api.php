@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\OrganizationController;
@@ -25,10 +26,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('v1/organization', [OrganizationController::class, 'index']);
+});
 
+
+Route::post('v1/register', [AuthController::class, 'register']);
+Route::post('v1/login', [AuthController::class, 'login']);
 Route::apiResource('v1/contacts', ContactController::class);
 Route::apiResource('v1/members', MemberController::class);
-Route::get('v1/organization', [OrganizationController::class, 'index']);
+
 Route::put('v1/organization', [OrganizationController::class, 'update']);
 Route::apiResource('v1/projects', ProjectController::class);
 Route::apiResource('v1/testimonials', TestimonialController::class);

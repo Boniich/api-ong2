@@ -3,13 +3,18 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Laravel\Sanctum\HasApiTokens;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class User extends Authenticatable
 {
@@ -153,6 +158,59 @@ class User extends Authenticatable
             return okResponse200($user, 'User deleted successfully');
         } catch (ModelNotFoundException $th) {
             return modelNotFoundResponse($this->modelNotFound);
+        }
+    }
+
+    public function register(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|confirmed'
+            ]);
+
+            if ($validator->fails()) {
+                throw new BadRequestException;
+            }
+
+            $user = new $this;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+
+            $user->save();
+
+            return okResponse200($user, 'User register successfully');
+        } catch (BadRequestException $th) {
+            return badRequestResponse400();
+        }
+    }
+
+    public function login(Request $request)
+    {
+        try {
+            $credentials = Validator::make($request->all(), [
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
+
+            if ($credentials->fails()) {
+                throw new BadRequestException;
+            }
+
+            if (!Auth::attempt($credentials->getData())) {
+                throw new AuthenticationException;
+            }
+
+            $user = Auth::user();
+            $token = $user->createToken('token')->plainTextToken;
+
+            return response()->json(['success' => true, 'data' => $user, 'token' => $token, 'message' => 'Login successfully']);
+        } catch (BadRequestException $th) {
+            return badRequestResponse400();
+        } catch (AuthenticationException $th) {
+            return response()->json(errorResponse('Invalid Credentials'), 401);
         }
     }
 }
