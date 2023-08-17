@@ -42,7 +42,6 @@ class UserTest extends TestCase
     public function test_create_a_new_user_successfully(): void
     {
         $response = $this->postJson($this->url, [
-            'id' => 1,
             'name' => 'Carlos Tests',
             'email' => 'test@gmail.com',
             'password' => '123456',
@@ -50,16 +49,16 @@ class UserTest extends TestCase
             'profile_image' => UploadedFile::fake()->image('imageTest.png'),
         ]);
 
+        $responseData = $response->json('data');
+        $image = $responseData['profile_image'];
+        destroyImage($image);
+
+
         $response->assertJson(['success' => true, 'data' => [
-            'id' => 1,
             'name' => 'Carlos Tests',
             'email' => 'test@gmail.com',
             'address' => 'Calle false 123',
         ], 'message' => 'User created successfully'])->assertStatus(201);
-
-        $user = User::find(1);
-
-        destroyImage($user->profile_image);
     }
 
     public function test_update_user_successfully()
