@@ -6,6 +6,216 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/v1/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register a new user",
+                "description": "Register a new user.",
+                "operationId": "6796c44e1f6079c411abbfed066c5907",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User register successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": [
+                                                {
+                                                    "id": 1,
+                                                    "name": "Boniich",
+                                                    "email": "boniich@gmail.com"
+                                                }
+                                            ]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "User register successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login user",
+                "description": "Login User.",
+                "operationId": "da2ca4d7a5cdec77b8b45a20373535cb",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User login successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 1,
+                                                "name": "Boniich",
+                                                "email": "boniich@gmail.com",
+                                                "email_verified_at": "null",
+                                                "address": "null",
+                                                "profile_image": "null"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "User deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid Credentials",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Invalid Credentials"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/contacts": {
             "get": {
                 "tags": [
@@ -849,8 +1059,39 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "User is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "format": "integer",
+                                            "example": "401"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -2442,6 +2683,16 @@
                         }
                     }
                 }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
             }
         }
     }
