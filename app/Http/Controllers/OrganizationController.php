@@ -19,6 +19,7 @@ class OrganizationController extends Controller
      *      path="/api/v1/organization",
      *      tags={"Organization"},
      *      summary="Display organization data",
+     *      security={{"sanctum":{}}},
      *      @OA\Response(
      *          response=200,
      *          description="Organization retrived successfully",
@@ -45,7 +46,15 @@ class OrganizationController extends Controller
      *              @OA\Property(property="message", type="string", format="string", example="Organization retrived successfully"),
      *      ),
      *  ),
-     * 
+     *     @OA\Response(
+     *          response=401,
+     *          description="User is not authenticated",
+     *          @OA\JsonContent(
+     *	            @OA\Property(property="status_code", type="integer", format="integer", example="401"),
+     *              @OA\Property(property="success", type="boolean", format="boolean", example="false"),
+     *              @OA\Property(property="error", type="string", example= "Unauthenticated"),
+     *          ),
+     *      )
      * )
      * 
      */
