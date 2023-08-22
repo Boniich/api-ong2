@@ -39,9 +39,18 @@ function makeAndDeleteDirectory(string $path)
     Storage::makeDirectory($fullPath);
 }
 
-function destroyImagesInTests($data)
+function destroyImagesInTestsForArrayWithIndex($response, $property = 'image')
 {
-    foreach ($data as $key => $value) {
-        destroyImage($value->image);
+    $responseData = $response->json('data');
+    foreach ($responseData as $key => $value) {
+        $image = $value[$property];
+        destroyImage($image);
     }
+}
+
+function destroyImagesInTests($response, $property = 'image')
+{
+    $responseData = $response->json('data');
+    $image = $responseData[$property];
+    destroyImage($image);
 }
