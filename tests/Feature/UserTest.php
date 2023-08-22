@@ -17,20 +17,18 @@ class UserTest extends TestCase
 
     public function test_get_all_user_successfully(): void
     {
-        $user = User::factory(1)->create(['id' => 1]);
+        User::factory(1)->create(['id' => 1]);
         $response = $this->getJson($this->url);
 
         $response->assertJson(['success' => true, 'data' => [['id' => 1]], 'message' => 'Users retrived successfully'])->assertStatus(200);
-        destroyImage($user[0]->profile_image);
     }
 
     public function test_get_one_user_by_id_successfully(): void
     {
-        $user = User::factory(1)->create(['id' => 1]);
+        User::factory(1)->create(['id' => 1]);
         $response = $this->getJson($this->url . '1');
 
         $response->assertJson(['success' => true, 'data' => ['id' => 1], 'message' => 'User retrived successfully'])->assertStatus(200);
-        destroyImage($user[0]->profile_image);
     }
 
     public function test_not_found_user_to_show_successfully(): void
@@ -49,10 +47,7 @@ class UserTest extends TestCase
             'profile_image' => UploadedFile::fake()->image('imageTest.png'),
         ]);
 
-        $responseData = $response->json('data');
-        $image = $responseData['profile_image'];
-        destroyImage($image);
-
+        destroyImagesInTests($response, 'profile_image');
 
         $response->assertJson(['success' => true, 'data' => [
             'name' => 'Carlos Tests',
@@ -63,7 +58,7 @@ class UserTest extends TestCase
 
     public function test_update_user_successfully()
     {
-        $user = User::factory(1)->create(['id' => 1]);
+        User::factory(1)->create(['id' => 1]); //agregar imagen con el estado
 
         $response = $this->putJson($this->url . '1', [
             'name' => 'Carlos Tests Actu',
@@ -73,8 +68,7 @@ class UserTest extends TestCase
             'profile_image' => UploadedFile::fake()->image('imageTest.png'),
         ]);
 
-        $user = User::find(1);
-        destroyImage($user->profile_image);
+        destroyImagesInTests($response, 'profile_image');
 
         $response->assertJson(['success' => true, 'data' => [
             'id' => 1,
@@ -92,7 +86,7 @@ class UserTest extends TestCase
 
     public function test_destroy_one_user_successfully(): void
     {
-        $user = User::factory(1)->create(['id' => 1]);
+        User::factory(1)->create(['id' => 1]);
 
         $response = $this->deleteJson($this->url . '1');
         $response->assertJson(['success' => true, 'data' => ['id' => 1], 'message' => 'User deleted successfully'])->assertStatus(200);

@@ -16,25 +16,21 @@ class SocialMediaItemTest extends TestCase
 
     public function test_get_all_social_media_item_successfully(): void
     {
-        $socialMediaItem = SocialMediaItem::factory(1)->create(['id' => 1]);
+        SocialMediaItem::factory(1)->create(['id' => 1]);
 
         $response = $this->getJson($this->url);
 
         $response->assertJson(['success' => true, 'data' => [['id' => 1]], 'message' => 'Social Media Items retrived successfully'])->assertStatus(200);
-
-        destroyImagesInTests($socialMediaItem);
     }
 
     public function test_get_one_social_media_item_successfully(): void
     {
 
-        $socialMediaItem = SocialMediaItem::factory(1)->create(['id' => 1]);
+        SocialMediaItem::factory(1)->create(['id' => 1]);
 
         $response = $this->getJson($this->url . '1');
 
         $response->assertJson(['success' => true, 'data' => ['id' => 1], 'message' => 'Social Media Item retrived successfully'])->assertStatus(200);
-
-        destroyImagesInTests($socialMediaItem);
     }
 
     public function test_not_found_social_media_item_to_show(): void
@@ -53,20 +49,18 @@ class SocialMediaItemTest extends TestCase
             'url' => 'facebook/ong'
         ]);
 
+        destroyImagesInTests($response);
+
         $response->assertJson(['success' => true, 'data' => [
             'id' => 1,
             'name' => 'Facebook',
             'url' => 'facebook/ong'
         ], 'message' => 'Social Media Item created successfully'])->assertStatus(201);
-
-        $data = SocialMediaItem::find(1);
-
-        destroyImage($data->image);
     }
 
     public function test_update_a_social_media_item_successfully(): void
     {
-        SocialMediaItem::factory(1)->create(['id' => 1]);
+        SocialMediaItem::factory(1)->withImage()->create(['id' => 1]);
 
         $response = $this->putJson($this->url . '1', [
             'name' => 'instagram',
@@ -74,14 +68,12 @@ class SocialMediaItemTest extends TestCase
             'url' => 'instagram/ong'
         ]);
 
+        destroyImagesInTests($response);
+
         $response->assertJson(['success' => true, 'data' => [
             'name' => 'instagram',
             'url' => 'instagram/ong',
         ], 'message' => 'Social Media Item updated successfully'])->assertStatus(200);
-
-        $data = SocialMediaItem::find(1);
-
-        destroyImage($data->image);
     }
 
     public function test_not_found_social_media_item_to_update(): void
@@ -92,7 +84,7 @@ class SocialMediaItemTest extends TestCase
 
     public function test_destroy_a_social_media_item_successfully(): void
     {
-        SocialMediaItem::factory(1)->create(['id' => 1]);
+        SocialMediaItem::factory(1)->withImage()->create(['id' => 1]);
 
         $response = $this->deleteJson($this->url . '1');
 

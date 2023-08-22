@@ -55,11 +55,22 @@ class AuthTest extends TestCase
 
     public function test_validation_error_at_login()
     {
+        User::factory(1)->create(['id' => 1, 'email' => 'auth@gmail.com', 'password' => '123456']);
         $response = $this->postJson($this->urlLogin, [
             'email' => 'auth@gmail.com',
             'password' => '123',
         ]);
 
         $response->assertJson(['success' => false, 'error' => 'Invalid Credentials'])->assertStatus(401);
+    }
+
+    public function test_bad_request_at_login()
+    {
+        User::factory(1)->create(['id' => 1, 'email' => 'auth@gmail.com', 'password' => '123456']);
+        $response = $this->postJson($this->urlLogin, [
+            'password' => '123456',
+        ]);
+
+        $response->assertJson(['success' => false, 'error' => 'Bad Request'])->assertStatus(400);
     }
 }

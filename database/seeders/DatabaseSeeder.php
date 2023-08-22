@@ -28,12 +28,12 @@ class DatabaseSeeder extends Seeder
 
         $this->call(ContactSeeder::class);
 
-        Member::factory(5)->create();
+        Member::factory(5)->withImage()->create(); //agregar estado de imagen
         Organization::factory(1)->create();
         Project::factory(5)->create();
-        Testimonial::factory(5)->create();
+        Testimonial::factory(5)->withImage()->create(); //agregar estado de imagen
 
-        SocialMediaItem::factory(5)->create();
-        User::factory(5)->create();
+        SocialMediaItem::factory(5)->withImage()->create(); //agregar estado de imagen
+        User::factory(5)->withImage()->create(); //agregar estado de imagen
     }
 }

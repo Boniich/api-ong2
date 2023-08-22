@@ -18,13 +18,15 @@ class OrganizationTest extends TestCase
 
     public function test_retrived_organization_data_successfully(): void
     {
-        $organization = Organization::factory(1)->create(['id' => 1]);
+        Organization::factory(1)->create(['id' => 1]);
 
         Sanctum::actingAs(
             User::factory()->create()
         );
 
         $response = $this->getJson($this->url);
+
+        destroyImagesInTestsForArrayWithIndex($response, 'logo');
 
         $response->assertJson(['success' => true, 'data' => [[
             'name' => 'ONG LARAVEL',
@@ -39,13 +41,11 @@ class OrganizationTest extends TestCase
             'instagram_url'  => 'instagram/ongLaravel',
             'twitter_url' => 'twitter/ongLaravel'
         ]], 'message' => 'Organization retrived successfully'])->assertStatus(200);
-
-        destroyImage($organization[0]->logo);
     }
 
     public function test_update_organization_data_successfully(): void
     {
-        $organization = Organization::factory(1)->create(['id' => 1]);
+        Organization::factory(1)->create(['id' => 1]);
         $response = $this->putJson($this->url, [
             'name' => 'Actualizando',
             'short_description'  => 'Actualizando',
@@ -60,6 +60,8 @@ class OrganizationTest extends TestCase
             'twitter_url' => 'Actualizando'
         ]);
 
+        destroyImagesInTests($response, 'logo');
+
         $response->assertJson(['success' => true, 'data' => [
             'name' => 'Actualizando',
             'short_description'  => 'Actualizando',
@@ -73,6 +75,5 @@ class OrganizationTest extends TestCase
             'instagram_url'  => 'Actualizando',
             'twitter_url' => 'Actualizando'
         ], 'message' => 'Organization data updated successfully'])->assertStatus(200);
-        destroyImage($organization[0]->logo);
     }
 }

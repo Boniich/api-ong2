@@ -17,21 +17,22 @@ class ProjectTest extends TestCase
 
     public function test_retrived_data_projects_successfully(): void
     {
-        $project = Project::factory(1)->create(['id' => 1]);
+        Project::factory(1)->create(['id' => 1]);
 
         $response = $this->getJson($this->url);
 
-        $response->assertJson(['success' => true, 'data' => [['id' => 1]], 'message' => 'Projects retrived successfully'])->assertStatus(200);
+        destroyImagesInTestsForArrayWithIndex($response);
 
-        destroyImagesInTests($project);
+        $response->assertJson(['success' => true, 'data' => [['id' => 1]], 'message' => 'Projects retrived successfully'])->assertStatus(200);
     }
 
     public function test_retrived_one_project_by_id_successfully(): void
     {
-        $project = Project::factory(1)->create(['id' => 1]);
+        Project::factory(1)->create(['id' => 1]);
         $response = $this->getJson($this->url . '1');
+
+        destroyImagesInTests($response);
         $response->assertJson(['success' => true, 'data' => ['id' => 1], 'message' => 'Project retrived successfully'])->assertStatus(200);
-        destroyImagesInTests($project);
     }
 
     public function test_project_to_show_not_found_successfully(): void
@@ -57,9 +58,10 @@ class ProjectTest extends TestCase
             'due_date' => '11/08/2023'
         ], 'message' => 'Project created successfully'])->assertStatus(201);
 
-        $data = Project::find(1);
-
-        destroyImage($data->image);
+        //cambiar forma de eliminar
+        destroyImagesInTests($response);
+        // $data = Project::find(1);
+        // destroyImage($data->image);
     }
 
     public function test_update_project_successfully(): void
@@ -79,9 +81,10 @@ class ProjectTest extends TestCase
             'due_date' => '14/09/2024'
         ], 'message' => 'Project updated successfully'])->assertStatus(200);
 
-        $data = Project::find(1);
-
-        destroyImage($data->image);
+        //cambiar forma de eliminar
+        destroyImagesInTests($response);
+        // $data = Project::find(1);
+        // destroyImage($data->image);
     }
 
     public function test_project_to_update_not_found_successfully(): void

@@ -17,20 +17,18 @@ class TestimonialTest extends TestCase
 
     public function test_retrived_all_testimonials_successfully(): void
     {
-        $testimonial = Testimonial::factory(1)->create(['id' => 1]);
+        Testimonial::factory(1)->create(['id' => 1]);
         $response = $this->getJson($this->url);
 
         $response->assertJson(['success' => true, 'data' => [['id' => 1]], 'message' => 'Testimonials retrived successfully']);
-        destroyImagesInTests($testimonial);
     }
 
     public function test_retrived_one_testimonial_successfully(): void
     {
-        $testimonial = Testimonial::factory(1)->create(['id' => 1]);
+        Testimonial::factory(1)->create(['id' => 1]);
         $response = $this->getJson($this->url . '1');
 
         $response->assertJson(['success' => true, 'data' => ['id' => 1], 'message' => 'Testimonial retrived successfully']);
-        destroyImagesInTests($testimonial);
     }
 
     public function test_not_found_testimonial_to_show(): void
@@ -48,21 +46,19 @@ class TestimonialTest extends TestCase
             'description' => 'Esta ong esta muy buena',
         ]);
 
+        destroyImagesInTests($response);
+
         $response->assertJson(['success' => true, 'data' => [
             'id' => 1,
             'name' => 'Juan Carlos',
             'description' => 'Esta ong esta muy buena',
         ], 'message' => 'Testimonial created successfully'])->assertStatus(201);
-
-        $data = Testimonial::find(1);
-
-        destroyImage($data->image);
     }
 
     public function test_update_testimonial_successfully(): void
     {
 
-        Testimonial::factory(1)->create(['id' => 1]);
+        Testimonial::factory(1)->withImage()->create(['id' => 1]);
 
         $response = $this->putJson($this->url . '1', [
             'name' => 'Juan Carlos',
@@ -70,15 +66,13 @@ class TestimonialTest extends TestCase
             'description' => 'Esta ong esta muy buena',
         ]);
 
+        destroyImagesInTests($response);
+
         $response->assertJson(['success' => true, 'data' => [
             'id' => 1,
             'name' => 'Juan Carlos',
             'description' => 'Esta ong esta muy buena',
         ], 'message' => 'Testimonial updated successfully'])->assertStatus(200);
-
-        $data = Testimonial::find(1);
-
-        destroyImage($data->image);
     }
 
     public function test_not_found_testimonial_to_update(): void
