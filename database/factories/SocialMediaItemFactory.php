@@ -18,8 +18,17 @@ class SocialMediaItemFactory extends Factory
     {
         return [
             'name' => $this->faker->sentence(3),
-            'image' => 'socialMediaItems/' . $this->faker->image('public/storage/socialMediaItems', 300, 300, null, false),
+            'image' => null,
             'url' => $this->faker->sentence(3),
         ];
+    }
+
+    public function withImage(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'image' => 'socialMediaItems/' . $this->faker->image('public/storage/socialMediaItems', 300, 300, null, false),
+            ];
+        });
     }
 }

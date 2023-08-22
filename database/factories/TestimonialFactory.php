@@ -18,8 +18,17 @@ class TestimonialFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'image' => 'testimonials/' . $this->faker->image('public/storage/testimonials', 300, 300, null, false),
+            'image' => null,
             'description' => $this->faker->sentence(3),
         ];
+    }
+
+    public function withImage(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'image' => 'testimonials/' . $this->faker->image('public/storage/testimonials', 300, 300, null, false),
+            ];
+        });
     }
 }
