@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\Member;
 use App\Models\Organization;
 use App\Models\Project;
+use App\Models\Slide;
 use App\Models\SocialMediaItem;
 use App\Models\Testimonial;
 use App\Models\User;
@@ -25,15 +26,17 @@ class DatabaseSeeder extends Seeder
         makeAndDeleteDirectory('testimonials');
         makeAndDeleteDirectory('socialMediaItems');
         makeAndDeleteDirectory('users');
+        makeAndDeleteDirectory('slides');
 
         $this->call(ContactSeeder::class);
 
-        Member::factory(5)->withImage()->create(); //agregar estado de imagen
+        Member::factory(5)->withImage()->create();
         Organization::factory(1)->create();
         Project::factory(5)->create();
-        Testimonial::factory(5)->withImage()->create(); //agregar estado de imagen
+        Testimonial::factory(5)->withImage()->create();
 
-        SocialMediaItem::factory(5)->withImage()->create(); //agregar estado de imagen
-        User::factory(5)->withImage()->create(); //agregar estado de imagen
+        SocialMediaItem::factory(5)->withImage()->create();
+        User::factory(5)->withImage()->create();
+        Slide::factory(5)->create();
     }
 }
