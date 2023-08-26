@@ -70,7 +70,7 @@ class Slide extends Model
 
             $newSlide->save();
 
-            return okResponse200($newSlide, "Slide created successfully");
+            return resourceCreatedResponse201($newSlide, "Slide created successfully");
         } catch (BadRequestException $th) {
             return badRequestResponse400();
         }
