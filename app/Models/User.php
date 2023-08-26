@@ -53,9 +53,19 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function slides()
+    {
+        return $this->hasMany(Slide::class);
+    }
+
+
     public function getAllUsers()
     {
         $users = $this->all();
+
+        foreach ($users as $key => $value) {
+            $value->slides;
+        }
 
         return okResponse200($users, 'Users retrived successfully');
     }
@@ -64,6 +74,8 @@ class User extends Authenticatable
     {
         try {
             $user = $this->findOrFail($id);
+
+            $user->slides;
 
             return okResponse200($user, 'User retrived successfully');
         } catch (ModelNotFoundException $th) {
