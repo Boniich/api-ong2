@@ -32,6 +32,7 @@ class UserController extends Controller
      *                          "email_verified_at": "2023-08-15T10:46:57.000000Z",
      *                          "address": "calle false 123",
      *                          "profile_image": "users/123456.png",
+     *                          "slides": {},
      *                      }
      *                  }),
      *              
@@ -73,6 +74,7 @@ class UserController extends Controller
      *                          "email_verified_at": "2023-08-15T10:46:57.000000Z",
      *                          "address": "calle false 123",
      *                          "profile_image": "users/123456.png",
+     *                          "slides": {},
      *                      }
      *                  ),
      *              
