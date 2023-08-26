@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SlideController;
 use App\Http\Controllers\SocialMediaItemController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\UserController;
@@ -28,8 +29,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('v1/organization', [OrganizationController::class, 'index']);
+    Route::apiResource('v1/slides', SlideController::class);
 });
-
 
 Route::post('v1/register', [AuthController::class, 'register']);
 Route::post('v1/login', [AuthController::class, 'login']);
@@ -41,3 +42,4 @@ Route::apiResource('v1/projects', ProjectController::class);
 Route::apiResource('v1/testimonials', TestimonialController::class);
 Route::apiResource('v1/socialmediaitems', SocialMediaItemController::class);
 Route::apiResource('v1/users', UserController::class);
+Route::apiResource('v1/slides', SlideController::class, ['only' => 'index']);
