@@ -216,6 +216,491 @@
                 }
             }
         },
+        "/api/v1/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Display a list of categories",
+                "operationId": "d9bf255011b42d56bf306832dc3366c8",
+                "responses": {
+                    "200": {
+                        "description": "Categories retrived successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": [
+                                                {
+                                                    "id": 1,
+                                                    "name": "Category",
+                                                    "description": "Description of category",
+                                                    "image": "categories/12345593.png"
+                                                }
+                                            ]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Categories retrived successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Create a new category",
+                "operationId": "cc8c3a3908a8b33010785820dbe9906f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "name of category",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "description": {
+                                        "description": "description of category",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "image": {
+                                        "description": "image of category",
+                                        "type": "file",
+                                        "format": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Category created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 1,
+                                                "name": "Category",
+                                                "description": "Description of category",
+                                                "image": "categories/12345593.png"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Category created successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "format": "integer",
+                                            "example": "401"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/categories/{id}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Display a category by id",
+                "operationId": "d809927cce155b8469de92d4c76f9288",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of category",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Category retrived successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 1,
+                                                "name": "Category",
+                                                "description": "Description of category",
+                                                "image": "categories/12345593.png"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Category retrived successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Category not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Category not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "format": "integer",
+                                            "example": "401"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Update a category by id",
+                "operationId": "a85a6c8ff85ebcaf43aaecc48fc4f15b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of category",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Category updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 1,
+                                                "name": "Category",
+                                                "description": "Description of category",
+                                                "image": "categories/12345593.png"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Category updated successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Category not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Category not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "format": "integer",
+                                            "example": "401"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Delete a category",
+                "operationId": "ae5cb8e79e90c032d135b59468e14efe",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of slide",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Category deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 1,
+                                                "name": "Category",
+                                                "description": "Description of category",
+                                                "image": "categories/12345593.png"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Category deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Category not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Category not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "format": "integer",
+                                            "example": "401"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/api/v1/contacts": {
             "get": {
                 "tags": [
