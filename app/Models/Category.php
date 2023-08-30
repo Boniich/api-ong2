@@ -93,7 +93,7 @@ class Category extends Model
 
             $category->update();
 
-            return okResponse200($category, 'Category updated sucessfully');
+            return okResponse200($category, 'Category updated successfully');
         } catch (ModelNotFoundException $th) {
             return modelNotFoundResponse($this->modelNotFound);
         } catch (BadRequestException) {
