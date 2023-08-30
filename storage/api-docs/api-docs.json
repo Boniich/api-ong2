@@ -610,7 +610,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of slide",
+                        "description": "id of category",
                         "required": true
                     }
                 ],
