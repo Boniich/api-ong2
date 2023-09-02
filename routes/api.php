@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
@@ -32,6 +33,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('v1/organization', [OrganizationController::class, 'index']);
     Route::apiResource('v1/slides', SlideController::class);
     Route::apiResource('v1/categories', CategoryController::class);
+    Route::apiResource('v1/activities', ActivityController::class);
 });
 
 Route::post('v1/register', [AuthController::class, 'register']);
@@ -46,3 +48,4 @@ Route::apiResource('v1/socialmediaitems', SocialMediaItemController::class);
 Route::apiResource('v1/users', UserController::class);
 Route::apiResource('v1/slides', SlideController::class, ['only' => 'index']);
 Route::apiResource('v1/categories', CategoryController::class, ['only' => 'index']);
+Route::apiResource('v1/activities', ActivityController::class, ['only' => 'index']);

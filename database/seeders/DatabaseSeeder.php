@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Activity;
 use App\Models\Category;
 use App\Models\Member;
 use App\Models\Organization;
@@ -30,6 +31,8 @@ class DatabaseSeeder extends Seeder
         makeAndDeleteDirectory('users');
         makeAndDeleteDirectory('slides');
         makeAndDeleteDirectory('categories');
+        makeAndDeleteDirectory('activities');
+
 
         $this->call(ContactSeeder::class);
 
@@ -42,5 +45,6 @@ class DatabaseSeeder extends Seeder
         User::factory(5)->withImage()->create();
         Slide::factory(5)->create();
         Category::factory(5)->create();
+        Activity::factory(2)->create();
     }
 }
