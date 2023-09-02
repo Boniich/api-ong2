@@ -15,6 +15,11 @@ class Category extends Model
 
     private string $modelNotFound = 'Category not found';
 
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
+    }
+
     public function getAllCategories()
     {
         $categories = $this->all();
@@ -26,6 +31,8 @@ class Category extends Model
     {
         try {
             $category = $this->findOrFail($id);
+
+            $category->activities;
 
             return okResponse200($category, 'Category retrived successfully');
         } catch (ModelNotFoundException $th) {
