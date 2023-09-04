@@ -63,6 +63,11 @@ class User extends Authenticatable
         return $this->hasMany(Activity::class);
     }
 
+    public function news()
+    {
+        return $this->hasMany(News::class);
+    }
+
     public function getAllUsers()
     {
         $users = $this->all();
@@ -70,6 +75,7 @@ class User extends Authenticatable
         foreach ($users as $key => $value) {
             $value->slides;
             $value->activities;
+            $value->news;
         }
 
         return okResponse200($users, 'Users retrived successfully');
@@ -82,6 +88,7 @@ class User extends Authenticatable
 
             $user->slides;
             $user->activities;
+            $user->news;
 
             return okResponse200($user, 'User retrived successfully');
         } catch (ModelNotFoundException $th) {

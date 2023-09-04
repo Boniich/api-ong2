@@ -20,6 +20,11 @@ class Category extends Model
         return $this->hasMany(Activity::class);
     }
 
+    public function news()
+    {
+        return $this->hasMany(News::class);
+    }
+
     public function getAllCategories()
     {
         $categories = $this->all();
@@ -33,6 +38,7 @@ class Category extends Model
             $category = $this->findOrFail($id);
 
             $category->activities;
+            $category->news;
 
             return okResponse200($category, 'Category retrived successfully');
         } catch (ModelNotFoundException $th) {
