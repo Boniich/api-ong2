@@ -40,7 +40,7 @@ class ActivityFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'catgory_id' => 1
+                'category_id' => 1
             ];
         });
     }
