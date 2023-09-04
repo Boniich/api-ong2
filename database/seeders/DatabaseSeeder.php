@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Activity;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Member;
 use App\Models\News;
 use App\Models\Organization;
@@ -34,6 +35,7 @@ class DatabaseSeeder extends Seeder
         makeAndDeleteDirectory('categories');
         makeAndDeleteDirectory('activities');
         makeAndDeleteDirectory('news');
+        makeAndDeleteDirectory('comments');
 
 
         $this->call(ContactSeeder::class);
@@ -49,5 +51,6 @@ class DatabaseSeeder extends Seeder
         Category::factory(5)->create();
         Activity::factory(2)->create();
         News::factory(2)->addCategory()->create();
+        Comment::factory(2)->create();
     }
 }
