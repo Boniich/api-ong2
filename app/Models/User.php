@@ -68,6 +68,11 @@ class User extends Authenticatable
         return $this->hasMany(News::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function getAllUsers()
     {
         $users = $this->all();
@@ -76,6 +81,7 @@ class User extends Authenticatable
             $value->slides;
             $value->activities;
             $value->news;
+            $value->comments;
         }
 
         return okResponse200($users, 'Users retrived successfully');
@@ -89,6 +95,7 @@ class User extends Authenticatable
             $user->slides;
             $user->activities;
             $user->news;
+            $user->comments;
 
             return okResponse200($user, 'User retrived successfully');
         } catch (ModelNotFoundException $th) {
