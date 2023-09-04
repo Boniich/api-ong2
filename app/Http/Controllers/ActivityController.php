@@ -36,7 +36,7 @@ class ActivityController extends Controller
      *                      }
      *                  }),
      *              
-     *              @OA\Property(property="message", type="string", format="string", example="Slides retrived successfully"),
+     *              @OA\Property(property="message", type="string", format="string", example="News retrived successfully"),
      *      ),
      *  ),
      * 
