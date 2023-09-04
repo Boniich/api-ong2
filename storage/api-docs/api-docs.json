@@ -42,7 +42,7 @@
                                         "message": {
                                             "type": "string",
                                             "format": "string",
-                                            "example": "Slides retrived successfully"
+                                            "example": "News retrived successfully"
                                         }
                                     },
                                     "type": "object"
@@ -2061,6 +2061,574 @@
                         }
                     }
                 }
+            }
+        },
+        "/api/v1/news": {
+            "get": {
+                "tags": [
+                    "News"
+                ],
+                "summary": "Display a list of news",
+                "operationId": "0a41686ae19fc1987cc2b7073539f82f",
+                "responses": {
+                    "200": {
+                        "description": "News retrived successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": [
+                                                {
+                                                    "id": 1,
+                                                    "name": "News",
+                                                    "slug": "News slug",
+                                                    "content": "This is a News",
+                                                    "image": null,
+                                                    "user_id": 1,
+                                                    "category_id": null
+                                                }
+                                            ]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "News retrived successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "News"
+                ],
+                "summary": "Create a new news",
+                "operationId": "31bff0164efe7110d7c4daf29dc4d24c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "name of news",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "slug": {
+                                        "description": "slug of news",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "content": {
+                                        "description": "content of news",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "image": {
+                                        "description": "image of news",
+                                        "type": "file",
+                                        "format": "file"
+                                    },
+                                    "category_id": {
+                                        "description": "ID of category",
+                                        "type": "integer",
+                                        "format": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "News created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 1,
+                                                "name": "News",
+                                                "slug": "News slug",
+                                                "content": "This is a News",
+                                                "image": null,
+                                                "user_id": 1,
+                                                "category_id": null
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "News created successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "format": "integer",
+                                            "example": "401"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Category ID not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Category ID not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/news/{id}": {
+            "get": {
+                "tags": [
+                    "News"
+                ],
+                "summary": "Display a news by id",
+                "operationId": "a1e1048d703bc2d1ba89234d6d1e27db",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of news",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "News retrived successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 1,
+                                                "name": "News",
+                                                "slug": "News slug",
+                                                "content": "This is an News",
+                                                "image": "news/12346.png",
+                                                "user_id": 1,
+                                                "category_id": null,
+                                                "user": {
+                                                    "id": 1,
+                                                    "name": "Boniich",
+                                                    "email": "boniich@gmail.com",
+                                                    "address": "901 Collier Forks",
+                                                    "profile_image": null
+                                                },
+                                                "category": null
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "News retrived successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "News not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "News not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "format": "integer",
+                                            "example": "401"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "News"
+                ],
+                "summary": "Update a news by id",
+                "operationId": "5c11abd86b5b43848fdac83d84d854bc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of news",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "slug": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "format": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "News updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 1,
+                                                "name": "News",
+                                                "slug": "News slug",
+                                                "content": "This is a News",
+                                                "image": null,
+                                                "user_id": 1,
+                                                "category_id": null
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "News updated successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "News not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "News not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "format": "integer",
+                                            "example": "401"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "News"
+                ],
+                "summary": "Delete a news",
+                "operationId": "3664f0e5f0d90e2cc4abd336a0319592",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of news",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "News deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "id": 1,
+                                                "name": "News",
+                                                "slug": "News slug",
+                                                "content": "This is a News",
+                                                "image": null,
+                                                "user_id": 1,
+                                                "category_id": null
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "News deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "News not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "News not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "format": "integer",
+                                            "example": "401"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "format": "boolean",
+                                            "example": "false"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/v1/organization": {
