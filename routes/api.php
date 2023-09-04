@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\NewsController;
@@ -36,6 +37,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('v1/categories', CategoryController::class);
     Route::apiResource('v1/activities', ActivityController::class);
     Route::apiResource('v1/news', NewsController::class);
+    Route::apiResource('v1/comments', CommentController::class);
 });
 
 Route::post('v1/register', [AuthController::class, 'register']);
@@ -52,3 +54,4 @@ Route::apiResource('v1/slides', SlideController::class, ['only' => 'index']);
 Route::apiResource('v1/categories', CategoryController::class, ['only' => 'index']);
 Route::apiResource('v1/activities', ActivityController::class, ['only' => 'index']);
 Route::apiResource('v1/news', NewsController::class, ['only' => 'index']);
+Route::apiResource('v1/comments', CommentController::class, ['only' => 'index']);
