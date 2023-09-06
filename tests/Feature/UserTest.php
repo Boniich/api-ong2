@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Database\Seeders\RoleSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
@@ -39,6 +40,8 @@ class UserTest extends TestCase
 
     public function test_create_a_new_user_successfully(): void
     {
+        $this->seed(RoleSeeder::class);
+
         $response = $this->postJson($this->url, [
             'name' => 'Carlos Tests',
             'email' => 'test@gmail.com',
