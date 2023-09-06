@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     private string $modelNotFound = 'User not found';
 
@@ -129,7 +130,7 @@ class User extends Authenticatable
                 $newUser->profile_image = upLoadImage($request->profile_image, 'users');
             }
 
-            $newUser->save();
+            $newUser->assignRole(2)->save();
 
             return resourceCreatedResponse201($newUser, 'User created successfully');
         } catch (\Throwable $th) {
@@ -211,7 +212,7 @@ class User extends Authenticatable
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
 
-            $user->save();
+            $user->assignRole(2)->save();
 
             return okResponse200($user, 'User register successfully');
         } catch (BadRequestException $th) {
