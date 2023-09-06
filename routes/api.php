@@ -9,6 +9,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\SocialMediaItemController;
 use App\Http\Controllers\TestimonialController;
@@ -38,6 +39,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('v1/activities', ActivityController::class);
     Route::apiResource('v1/news', NewsController::class);
     Route::apiResource('v1/comments', CommentController::class);
+    Route::apiResource('v1/roles', RoleController::class);
 });
 
 Route::post('v1/register', [AuthController::class, 'register']);

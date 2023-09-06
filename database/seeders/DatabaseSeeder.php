@@ -39,6 +39,8 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call(ContactSeeder::class);
+        $this->call(RoleSeeder::class);
+        $this->call(UserSeeder::class);
 
         Member::factory(5)->withImage()->create();
         Organization::factory(1)->create();
