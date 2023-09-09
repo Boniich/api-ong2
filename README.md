@@ -1,66 +1,107 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# API REST ONG
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a copy of a API REST that i used in my acceleracion of REACT in ALKEMY in 2022.
 
-## About Laravel
+## YOUTUBE
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+I believe that one of best way to improve our knowledge is teaching or explain concepts to other, that why i make a full playlist of 50 records, where i am going creainting this API REST, using `LARAVEL`, `DOCKER`, and `POSTGRESQL`
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+You can take a look here: https://www.youtube.com/playlist?list=PLl9ZbfOa8iGkEGt5BpHvk_CLdEP3nPK-2
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## STACK/TECNOLOGIES
 
-## Learning Laravel
+-   LARAVEL
+-   DOCKER
+-   POSTGRESQL
+-   LARAVEL PERMISSION (Handle all about roles and permission)
+-   SANTUM
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## FEATURES
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   Creation of tables, models, controllers, factories, seeder
+-   Upload, updating and destroy of images
+-   Login and register
+-   All most all endpoints can show all records, one record, update, create and destroy records
+-   Error handeling
+-   Override of exceptions
+-   Creation and use of HELPER FUNCTIONS
+-   TESTING (Data base testing and HTTP response testing)
+-   DOCUMENTACION (using swagger)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Extra
 
-## Laravel Sponsors
+-   I used postman during development
+-   A full use of `Linux terminal` to run commands
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## How to run/see this API REST?
 
-### Premium Partners
+Unfortunelly, i am still having problem with desploy, meanwhile i work in it, i will give you two way to see my work:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## 1 - See this demo record
 
-## Contributing
+In this record of 5 minutes, you will see a fast advance of all this API REST:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+https://youtu.be/pMBRVL9Zteg
 
-## Code of Conduct
+## 2- Clone de repo and run the project
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+This second way requires a bit more of effort, but i let the step if you want to make it
 
-## Security Vulnerabilities
+1- You need DOCKER in your computer  
+2- Clone de repo  
+3- Open it with VSCode or another code editor
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Note: since this point you will need a command line of linux (You can use command line that come with sub system add with DOCKER)
 
-## License
+4- Run de command `./vendor/bin/sail up` to up de project  
+5- Run migracion `./vendor/bin/sail artisan migration`  
+6- Run Seeder and factories: `./vendor/bin/sail artisan db:seed`  
+7- Read/Take a look to the code
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Take a look at documentacion generate with swagger
+
+Here you will see all endpoints of API REST and will be able to make them work
+
+1- Access to documentacion of API REST with the endpoint `localhost/documentacion` in your browser  
+2- In this point you should have see all endpoints and MAKE WORK `ALL PUBLIC ENDPOINTS`
+
+### Make work private/protected endpoints with in swagger:
+
+1- Login one of two users leaved here belown.  
+2- Copy the `TOKEN` of answer  
+3- Click in the button `Authorizade`  
+4- In the input of modal window introduce: `Bearer Token that you copied`
+
+Note: It is required that you add the word `Bearer` and the space ` ` and then the `TOKEN`, any other pattern will give an incorrect authorization
+
+5- Use all private/protected methods
+
+### Running endpoints by postman or another program/extension
+
+If you want use the postman or another programa/extension can follow the nexts step (it depends of each program)
+
+1- You can use POSTMAN or another program to HTTP Request for test `ALL PUBLIC ENDPOINTS` following the next url: `http://0.0.0.0:80/api/v1/addenpointhere`
+
+Note: remplace `addenpointhere` for the endpoint name that you want to use.
+
+### To use protected/private endpoints:
+
+1- Login one of two users leaved here belown.  
+2- Copy the `TOKEN` of answer  
+3- (In Postman) go to the authorization window and select `Bearer TOKEN` then paste the `TOKEN` that you copy before
+
+## Users to login and use the protected endpoints
+
+First user, here will able to use almost all endpoints, except `ROLE ENDPOINTS`, cause it required `ADMIN ROLE` to use that `ENDPOINT`
+
+```
+email: user@gmail.com
+password: 123456
+```
+
+Second user, this user has the `ROLE of ADMIN`, so, will able to use ALL endpoints of API REST
+
+```
+email: admin@gmail.com
+password: 123456
+```
